@@ -9,7 +9,15 @@ router
     .get(async (req, res) => {
         const data = await models.Post.findAll({ include: 'user' })
         res.json(data)
-})
+    })
+    .post(async (req, res) => {
+        const data = await models.Post.findAll({
+            offset: 0,
+            limit : 4,
+            include: 'user'
+        })
+        res.json(data)
+    })
 
 router
     .route('/user')

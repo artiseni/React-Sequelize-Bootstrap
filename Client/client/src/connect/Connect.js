@@ -26,7 +26,7 @@ class Connect {
 
         } else {
             const apidata = await fetch (this.url, {
-                method  : 'POST',
+                method  : this.method
             })
 
             if (apidata.status === 200) {

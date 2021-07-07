@@ -11,7 +11,7 @@ const Blog = () => {
     
     useEffect(() => {
 
-        const connect = new Connect(url)
+        const connect = new Connect(url, 'POST')
 
         async function fetchData () {
             const data = await connect.postData()
@@ -21,7 +21,7 @@ const Blog = () => {
     }, [])
 
     if (state.length !== 0) {
-        console.log(state)
+        // console.log(state)
         return (
             <Container>
                 <h1>Hello</h1>
