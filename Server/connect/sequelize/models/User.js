@@ -3,6 +3,12 @@ const connect = require('../config/config.js')
 const Post = require("./Post")
 
 const User = connect.define('User', {
+    id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type : sequelize.INTEGER  
+    },
     username: {
         type : sequelize.STRING
     },
@@ -10,6 +16,9 @@ const User = connect.define('User', {
         type : sequelize.STRING
     },
     password: {
+        type : sequelize.STRING
+    },
+    createdAt: {
         type : sequelize.STRING
     }
 },{tableName: "users"})

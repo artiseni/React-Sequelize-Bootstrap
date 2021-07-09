@@ -6,14 +6,18 @@ const models = require('../models')
 
 router
     .route('/blogs')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         const data = await models.Post.findAll({ include: 'user' })
         res.json(data)
     })
-    .post(async (req, res) => {
-        const data = await models.Post.findAll({
-            offset: 0,
-            limit : 4,
+    .get(async (req, res) => {
+        const page = req.query.page
+        const perPage = req.query.perPage
+        console.log(`Page ke-${page}`)
+        console.log(`Jumlah data = ${perPage}`)
+        const data = await models.Post.findAndCountAll({
+            offset: (page * perPage) - perPage,
+            limit : perPage,
             include: 'user'
         })
         res.json(data)
@@ -49,6 +53,26 @@ router
     }).catch( err => console.log(err))
 })
 
+router
+    .route('/signup')
+    .post( async (req, res) => {
+
+        const username = req.body.username
+        const email = req.body.email
+        const password = req.body.password
+
+        const data = await models.User.findAndCountAll({
+            where: {
+                email : email
+            }
+        })
+
+        if (data.count === 0) {
+            res.json({message : "Email valid!"})
+        } else {
+            res.json({message : "Email sudah digunkan"})
+        }
+})
 
 
 module.exports = router
