@@ -44,7 +44,18 @@ const Signup = () => {
         })
     }
 
-    // console.log(state)
+    // get result from API
+
+     const resultHandler = (data) => {
+        // error request handler
+        data.type === 'cors' ?
+            data.json().then(result => {
+                result = result.message
+                alert(result)    
+            })
+        : console.log(data)
+        
+    }
 
     const getInput = async () => {
 
@@ -56,7 +67,7 @@ const Signup = () => {
             const data = keyChanger(state)
             const connect = new Connect(`http://localhost:5000/signup`, 'POST', data)
             const res = await connect.requestData()
-            console.log(res)
+            resultHandler(res)
         }
     }
 

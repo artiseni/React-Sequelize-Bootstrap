@@ -17,9 +17,6 @@ const User = connect.define('User', {
     },
     password: {
         type : sequelize.STRING
-    },
-    createdAt: {
-        type : sequelize.STRING
     }
 },{tableName: "users"})
 

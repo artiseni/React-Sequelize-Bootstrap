@@ -9,7 +9,9 @@ const Paginate = ({totalPage, load, currentPage, firstPage, lastPage, page, prev
 
     const getNum = (e) => {
         const data = (parseInt(e.target.innerHTML))
-        load(data)
+        if (!isNaN(data)) {
+            load(data)
+        }
     }
 
     if (currentPage < totalPage) {
@@ -36,7 +38,7 @@ const Paginate = ({totalPage, load, currentPage, firstPage, lastPage, page, prev
                 <Pagination.First disabled={firstPage} onClick={ () => load(1) } />
                     <Pagination.Prev disabled={previous} onClick={ () => load(currentPage - 1) } />
                         {pages}
-                <Pagination.Next disabled={next} onClick={() => load(currentPage + 1)} />
+                    <Pagination.Next disabled={next} onClick={() => load(currentPage + 1)} />
                 <Pagination.Last disabled={lastPage} onClick={ () => load(totalPage) } />
             </Pagination>
         </Container>

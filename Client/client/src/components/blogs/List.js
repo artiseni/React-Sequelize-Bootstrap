@@ -17,12 +17,14 @@ const funReducer = (state, action) => {
         case 'info':
             return {
                 ...state,
-                collection: action.collection,
                 loading: action.loading,
-                firstPage: action.firstPage,
-                lastPage: action.lastPage,
+                collection: action.collection,
                 currentPage: action.currentPage,
                 dataPerPage: action.dataPerPage,
+                firstPage: action.firstPage,
+                lastPage: action.lastPage,
+                previous: action.previous,
+                next: action.next,
                 allPage: action.allPage
             }
         default:
@@ -33,16 +35,28 @@ const funReducer = (state, action) => {
 const List = () => {
 
     const [reducePage, reduce] = useReducer(funReducer, {
-        collection: [],
         loading: false,
-        lastPage: false,
-        firstPage: false,
+        collection: [],
         currentPage: 1,
         dataPerPage: 4,
+        firstPage: false,
+        lastPage: false,
+        previous: true,
+        next: true,
         allPage: 0
     })
     
-    const { collection, loading, lastPage, firstPage, currentPage, dataPerPage, allPage } = reducePage
+    const {
+        collection,
+        loading,
+        lastPage,
+        firstPage,
+        currentPage,
+        dataPerPage,
+        allPage,
+        previous,
+        next
+    } = reducePage
 
     useEffect(() => {
         const fetchApi = () => {
@@ -52,10 +66,12 @@ const List = () => {
                     loading: true,
                     collection : data.rows,
                     currentPage: currentPage,
-                    firstPage: (currentPage === 1),
                     dataPerPage : dataPerPage,
-                    allPage : Math.ceil(data.count/dataPerPage),
-                    lastPage : (currentPage === allPage)
+                    firstPage: (currentPage === 1),
+                    lastPage: (currentPage === allPage),
+                    previous: (currentPage === 1),
+                    next: (currentPage === allPage),
+                    allPage : Math.ceil(data.count/dataPerPage)
                 })
             })
         }
@@ -70,13 +86,16 @@ const List = () => {
                 loading: true,
                 collection : data.rows,
                 currentPage: targetPage,
-                firstPage: (currentPage === 1),
                 dataPerPage : dataPerPage,
-                allPage : Math.ceil(data.count/dataPerPage),
-                lastPage : (targetPage === allPage)
+                firstPage: (currentPage === 1),
+                lastPage: (targetPage === allPage),
+                previous: (targetPage === 1),
+                next: (targetPage === allPage),
+                allPage : Math.ceil(data.count/dataPerPage)
             })
         })
     }
+
 
     return (
             <Container>
@@ -104,7 +123,18 @@ const List = () => {
                         </div>
                     ) : <Alert variant="success">Data sedang diproses... </Alert>
                 }
-                <Pagination totalPage={allPage} perPage={dataPerPage} load={load} firstPage={firstPage} lastPage={lastPage} page={ currentPage }/>
+                
+                <Pagination
+                    totalPage={allPage}
+                    perPage={dataPerPage}
+                    load={load}
+                    currentPage={currentPage}
+                    firstPage={firstPage}
+                    lastPage={lastPage}
+                    page={currentPage}
+                    previous={previous}
+                    next={next}
+                />
 
             </Container>
         )

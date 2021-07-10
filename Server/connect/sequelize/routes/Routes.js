@@ -3,7 +3,6 @@ const router = express.Router()
 const models = require('../models')
 
 
-
 router
     .route('/blogs')
     .post(async (req, res) => {
@@ -33,8 +32,7 @@ router
             for (let i = 0; i < users.length; i++) {
                 arrObj.push(users[i].dataValues)
             }
-            res.status(200)
-            res.json(arrObj)
+            res.status(200).json(arrObj)
     }).catch( err => console.log(err))
 })
 
@@ -48,8 +46,7 @@ router
             for (let i = 0; i < posts.length; i++) {
                 arrObj.push(posts[i].dataValues)
             }
-            res.status(200)
-            res.json(arrObj)
+            res.status(200).json(arrObj)
     }).catch( err => console.log(err))
 })
 
@@ -68,23 +65,18 @@ router
         })
 
         if (data.count === 0) {
-            res.json({message : "Email valid!"})
+            const addTo = await models.User.create({
+                username: username,
+                email: email,
+                password: password 
+            })
+
+            res.status(200).json(addTo)
+            
         } else {
-            res.json({message : "Email sudah digunkan"})
+            res.status(400).json({message : "Email sudah digunkan"})
         }
 })
 
 
 module.exports = router
-
-
-// const data = await Posts.findAll({
-//             where: {
-//                 post_by : 'Ani'
-//             }
-//         })
-//         let arrObj = []
-//         for (let i = 0; i < data.length; i++) {
-//             arrObj.push(data[i].dataValues)
-//         }
-//         console.log(arrObj)
