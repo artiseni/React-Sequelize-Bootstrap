@@ -18,11 +18,11 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "react-router-dom": "^5.2.0",
-    "sequelize": "^6.6.4",
+    "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0",
     "sequelize-to-json": "^0.10.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.12"
   }
 }
