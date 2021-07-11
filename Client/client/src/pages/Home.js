@@ -26,7 +26,7 @@ const Home = () => {
                     <Nav.Link >Pricing</Nav.Link>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
-                    <Nav.Link >Logout</Nav.Link>
+                    <Nav.Link href="/">Logout</Nav.Link>
                 </Navbar.Collapse>
             </Navbar>
             <Container>

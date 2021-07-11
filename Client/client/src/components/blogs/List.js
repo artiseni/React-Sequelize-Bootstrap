@@ -1,7 +1,8 @@
-import { Container, Alert, Card, Navbar, Nav } from 'react-bootstrap'
+import { Container, Alert, Card, Navbar, Nav, Row, Col } from 'react-bootstrap'
 import React, { useReducer, useEffect } from "react"
 import Connect from "../../connect/Connect"
 import Pagination from './Pagination'
+import Login from '../../pages/Login'
 
 const getCollection = (params = { page: 1, perPage: 4 }) => { // params = { page: 1, perPage: 4 }
     const url = 'http://localhost:5000/blogs'
@@ -100,7 +101,7 @@ const List = () => {
         <>
             <div className='navbar-top'>    
                 <Navbar bg="primary" variant="dark" className="p-2" >
-                    <Navbar.Brand > SimpleBlog </Navbar.Brand>
+                    <Navbar.Brand href="/" > SimpleBlog </Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/login" >Login</Nav.Link>
                         <Nav.Link href="/signup" >Signup</Nav.Link>
@@ -108,30 +109,39 @@ const List = () => {
                 </Navbar>
             </div>
             <Container>
-                { loading ?
-                    collection.map(result =>
-                        <div className='App' key={result.id}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Text>
-                                        By : { result.user.username }
-                                    </Card.Text>
-                                    <Card.Text>
-                                        Last update : { result.updatedAt }
-                                    </Card.Text>
-                                    <Card.Title>
-                                        { result.title }
-                                    </Card.Title>
-                                    <Card.Text>
-                                        { result.content }
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                            <br/>
+                <Row>
+                    <Col md>
+                        { loading ?
+                            collection.map(result =>
+                                <div className='App blogs' key={result.id}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Text>
+                                                By : { result.user.username }
+                                            </Card.Text>
+                                            <Card.Text>
+                                                Last update : { result.updatedAt }
+                                            </Card.Text>
+                                            <Card.Title>
+                                                { result.title }
+                                            </Card.Title>
+                                            <hr/>
+                                            <Card.Text>
+                                                { result.content }
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                    <br/>
+                                </div>
+                            ) : <Alert variant="success">Data sedang diproses... </Alert>
+                        }
+                    </Col>
+                    <Col md>
+                        <div className='LoginList'>
+                            <Login />
                         </div>
-                    ) : <Alert variant="success">Data sedang diproses... </Alert>
-                }
-                
+                    </Col>
+                </Row>
                 <Pagination
                     totalPage={allPage}
                     perPage={dataPerPage}
@@ -143,7 +153,6 @@ const List = () => {
                     previous={previous}
                     next={next}
                 />
-
             </Container>
         </>)
     

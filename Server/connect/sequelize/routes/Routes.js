@@ -79,4 +79,23 @@ router
 })
 
 
+
+router
+    .route('/login')
+    .post( async (req, res) => {
+
+        const email = req.body.email
+        const password = req.body.password
+
+        const data = await models.User.findOne({
+            where: {
+                email: email,
+                password: password 
+            }
+        })
+
+        data ? res.status(200).json(data) : res.status(400).json({message : "Data tidak ditemukan"})
+
+})
+
 module.exports = router

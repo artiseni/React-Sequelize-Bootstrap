@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Button, Container, Card, Form, Row, Col } from 'react-bootstrap'
+import { Button, Container, Card, Form, Navbar, Nav, Row, Col } from 'react-bootstrap'
 import Connect from '../connect/Connect'
 
 
@@ -86,44 +86,54 @@ const Signup = () => {
     }
 
     return (
-        <Container>
-            <Row>
-                <Card className="App">
-                    <Form>
-                        <Col md>
-                            <Form.Group controlId="formText">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="text" placeholder="Username" onChange={inputUser} name='username' />
-                            </Form.Group>
-                        </Col>
-                        <Col md>
-                            <Form.Group controlId="formEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="example@gmail.com" onChange={inputUser} name='email' />
-                                <Form.Text className="text-muted">
-                                Gmail only
-                                </Form.Text>
-                            </Form.Group>
-                        </Col>
-                        <Col md>
-                            <Form.Group controlId="formPassword1">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Type your password" onChange={inputUser} name='password1' />
-                            </Form.Group>
-                        </Col>
-                        <Col md>
-                            <Form.Group controlId="formPassword2">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Re-type your password" onChange={inputUser} name='password2' />
-                            </Form.Group>    
-                            <br/>
-                        </Col>
-                        <Button varian="primary" onClick={getInput}>Signup</Button>
-                        <br/><br/>
-                    </Form>
-                </Card>
-            </Row>
-        </Container>
+        <>
+            <div className='navbar-top'>    
+                <Navbar bg="primary" variant="dark" className="p-2" >
+                    <Navbar.Brand href="/" > SimpleBlog </Navbar.Brand>
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/login" >Login</Nav.Link>
+                    </Nav>
+                </Navbar>
+            </div>
+            <Container>
+                <Row>
+                    <Card className="App Signup">
+                        <Form>
+                            <Col md>
+                                <Form.Group controlId="formText">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="Username" onChange={inputUser} name='username' />
+                                </Form.Group>
+                            </Col>
+                            <Col md>
+                                <Form.Group controlId="formEmail">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="email" placeholder="example@gmail.com" onChange={inputUser} name='email' />
+                                    <Form.Text className="text-muted">
+                                    Gmail only
+                                    </Form.Text>
+                                </Form.Group>
+                            </Col>
+                            <Col md>
+                                <Form.Group controlId="formPassword1">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Type your password" onChange={inputUser} name='password1' />
+                                </Form.Group>
+                            </Col>
+                            <Col md>
+                                <Form.Group controlId="formPassword2">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Re-type your password" onChange={inputUser} name='password2' />
+                                </Form.Group>    
+                                <br/>
+                            </Col>
+                            <Button varian="primary" onClick={getInput}>Signup</Button>
+                            <br/><br/>
+                        </Form>
+                    </Card>
+                </Row>
+            </Container>
+        </>
     ) 
 }
 

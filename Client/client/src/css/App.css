@@ -1,5 +1,6 @@
 .App {
-  margin: 10px
+  margin: 10px;
+  width: 100%;
 }
 
 .Home {
@@ -8,7 +9,9 @@
 }
 
 .container {
-  margin-top: 80px
+  margin-top: 80px;
+  align-items: center;
+  justify-content: center
 }
 
 form {
@@ -35,8 +38,27 @@ form {
   justify-content: center;
 }
 
+.LoginList {
+  width: 400px;
+  right: 60px;
+  position: fixed
+}
+
+@media only screen and (max-device-width: 900px) {
+  .LoginList {
+    display: none;
+  }
+
+}
+
 @media only screen and (max-device-width: 570px) {
   .App {
-    color: #0d6efd;
+    width: 95%;
+  }
+
+  .pagination {
+    width: 50px;
+    margin: auto;
+    bottom: 20px;
   }
 }
