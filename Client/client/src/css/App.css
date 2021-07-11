@@ -1,0 +1,42 @@
+.App {
+  margin: 10px
+}
+
+.Home {
+  color: #0d6efd;
+  margin: 20px
+}
+
+.container {
+  margin-top: 80px
+}
+
+form {
+  margin: 20px 30px
+}
+
+.form-label {
+  color: #0d6efd
+}
+
+.navbar-top {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+}
+
+.collapse a {
+  color: beige;
+}
+
+.pagination {
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-device-width: 570px) {
+  .App {
+    color: #0d6efd;
+  }
+}

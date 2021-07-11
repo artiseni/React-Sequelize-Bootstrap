@@ -1,6 +1,5 @@
-import { Container, Alert, Card } from 'react-bootstrap'
+import { Container, Alert, Card, Navbar, Nav } from 'react-bootstrap'
 import React, { useReducer, useEffect } from "react"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Connect from "../../connect/Connect"
 import Pagination from './Pagination'
 
@@ -98,8 +97,17 @@ const List = () => {
 
 
     return (
+        <>
+            <div className='navbar-top'>    
+                <Navbar bg="primary" variant="dark" className="p-2" >
+                    <Navbar.Brand > SimpleBlog </Navbar.Brand>
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/login" >Login</Nav.Link>
+                        <Nav.Link href="/signup" >Signup</Nav.Link>
+                    </Nav>
+                </Navbar>
+            </div>
             <Container>
-                <h1>Hello</h1>
                 { loading ?
                     collection.map(result =>
                         <div className='App' key={result.id}>
@@ -137,7 +145,7 @@ const List = () => {
                 />
 
             </Container>
-        )
+        </>)
     
 }
 

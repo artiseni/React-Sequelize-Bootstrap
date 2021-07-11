@@ -6,12 +6,6 @@ const connect = require('./connect/sequelize/config/config')
 const Routes = require('./connect/sequelize/routes/Routes')
 
 
-// TEST DB
-
-connect.authenticate()
-    .then(() => console.log('Database connected...'))
-    .catch(err => console.log(err))
-
 
 app.use(cors());
 app.options('*', cors());
@@ -20,6 +14,13 @@ app.use(express.json()) // req body
 // Routes Users
 app.use('/', Routes)
 
-app.listen(port, () => {
+app.listen(port, async () => {
+    
     console.log(`Server is listening on port ${port}`)
+    
+    // TEST DB
+    connect.authenticate()
+        .then(() => console.log('Database connected...'))
+        .catch(err => console.log(err))
+    
 })

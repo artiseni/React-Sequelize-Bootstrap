@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Button, Container, Card, Form, Row, Col } from 'react-bootstrap'
-import Connect from '../../connect/Connect'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Connect from '../connect/Connect'
 
 
 
@@ -20,7 +20,8 @@ const signUpReduce = (state, action) => {
         case TYPE.PAGE:
             return {
                 ...state,
-                [action.fielName]: action.payload
+                isEmpty : false,
+                resData : action.payload
             }
         default:
             return state
@@ -28,13 +29,15 @@ const signUpReduce = (state, action) => {
 }
 
 const Signup = () => {
-
+    
     const [state, dispatch] = useReducer(signUpReduce, {
         username: '',
         email: '',
         password1: '',
         password2: ''
     })
+
+    const history = useHistory()
 
     const inputUser = (e) => {
         dispatch({
@@ -44,21 +47,18 @@ const Signup = () => {
         })
     }
 
-    // get result from API
 
-     const resultHandler = (data) => {
-        // error request handler
+    // get result from API
+    const resultHandler = (data) => {
         data.type === 'cors' ?
             data.json().then(result => {
                 result = result.message
-                alert(result)    
-            })
-        : console.log(data)
-        
+                alert(result)
+            }) : history.push({ pathname: '/home', state : data })
     }
 
-    const getInput = async () => {
 
+    const getInput = async () => {
         if (state.username === '' || state.email === '' || state.password1 === '' || state.password2 === '' ) {
             alert ('Data tidak boleh kosong!')
         } else if (state.password1 !== state.password2) {
@@ -124,7 +124,7 @@ const Signup = () => {
                 </Card>
             </Row>
         </Container>
-    )
+    ) 
 }
 
 export default Signup
