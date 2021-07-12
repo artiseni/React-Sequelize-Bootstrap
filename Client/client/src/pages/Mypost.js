@@ -12,7 +12,7 @@ const Mypost = () => {
     return (
         <>
             <NavbarHome dataPath={path}/>
-            <MyList url={'http://localhost:5000/blogs'} data={data} />
+            <MyList url={'http://localhost:5000/mypost'} data={data} />
         </>
     )
 }

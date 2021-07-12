@@ -25,10 +25,11 @@ const funReducer = (state, action) => {
     }
 }
 
-const getCollection = (url, params = { page: 1, perPage: 4 }) => { // params = { page: 1, perPage: 4 }
+const getCollection = (url, params = { page: 1, perPage: 4, userId : null }) => { // params = { page: 1, perPage: 4 }
     const page = params.page
     const perPage = params.perPage
-    const connect = new Connect(url, "GET", { page: page, perPage: perPage })
+    const userId = params.userId
+    const connect = new Connect(url, "GET", { page: page, perPage: perPage, userId: userId })
     return connect.requestData()
 }
 
@@ -65,7 +66,7 @@ const MyList = (props) => {
 
     useEffect(() => {
         const fetchApi = () => {
-            getCollection(url, { page: currentPage, perPage: dataPerPage }).then(data => {
+            getCollection(url, { page: currentPage, perPage: dataPerPage, userId: data.id }).then(data => {
                 reduce({
                     type: 'info',
                     loading: true,
@@ -81,11 +82,11 @@ const MyList = (props) => {
             })
         }
         fetchApi()
-    }, [currentPage, dataPerPage, allPage, url])
+    }, [currentPage, dataPerPage, allPage, url, data.id])
 
     const load = (targetPage) => {
 
-        getCollection(url, { page: targetPage, perPage: dataPerPage }).then(data => {
+        getCollection(url, { page: targetPage, perPage: dataPerPage, userId : data.id }).then(data => {
             reduce({
                 type: 'info',
                 loading: true,

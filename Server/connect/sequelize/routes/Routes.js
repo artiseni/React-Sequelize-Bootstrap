@@ -25,11 +25,15 @@ router
 router
     .route('/mypost')
     .get(async (req, res) => {
+
+        // console.log(req.query)
+        const userId = req.query.userId
         const page = req.query.page
         const perPage = req.query.perPage
         console.log(`Page ke-${page}`)
         console.log(`Jumlah data = ${perPage}`)
         const data = await models.Post.findAndCountAll({
+            where : { userId : userId},
             offset: (page * perPage) - perPage,
             limit : perPage,
             include: 'user'
