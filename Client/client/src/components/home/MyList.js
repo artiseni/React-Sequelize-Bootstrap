@@ -1,8 +1,8 @@
-import { Container, Alert, Card, Row, Col } from 'react-bootstrap'
+import { Container, Alert, Card, Row, Col, Button } from 'react-bootstrap'
 import React, { useReducer, useEffect } from "react"
 import Connect from "../../connect/Connect"
-import Pagination from './Pagination'
-import Login from '../../pages/Login'
+import Pagination from '../blogs/Pagination'
+
 
 
 const funReducer = (state, action) => {
@@ -25,16 +25,19 @@ const funReducer = (state, action) => {
     }
 }
 
-const getCollection = (params = { page: 1, perPage: 4 }, url) => { // params = { page: 1, perPage: 4 }
+const getCollection = (url, params = { page: 1, perPage: 4 }) => { // params = { page: 1, perPage: 4 }
     const page = params.page
     const perPage = params.perPage
     const connect = new Connect(url, "GET", { page: page, perPage: perPage })
     return connect.requestData()
 }
 
-const List = (props) => {
+const MyList = (props) => {
 
     const url = props.url
+    const data = props.data // rehat!
+
+    console.log(data)
 
     const [reducePage, reduce] = useReducer(funReducer, {
         loading: false,
@@ -62,7 +65,7 @@ const List = (props) => {
 
     useEffect(() => {
         const fetchApi = () => {
-            getCollection({ page: currentPage, perPage: dataPerPage }, url).then(data => {
+            getCollection(url, { page: currentPage, perPage: dataPerPage }).then(data => {
                 reduce({
                     type: 'info',
                     loading: true,
@@ -82,7 +85,7 @@ const List = (props) => {
 
     const load = (targetPage) => {
 
-        getCollection({ page: targetPage, perPage: dataPerPage }, url).then(data => {
+        getCollection(url, { page: targetPage, perPage: dataPerPage }).then(data => {
             reduce({
                 type: 'info',
                 loading: true,
@@ -122,6 +125,7 @@ const List = (props) => {
                                             <Card.Text>
                                                 { result.content }
                                             </Card.Text>
+                                            <Button>Edit</Button>
                                         </Card.Body>
                                     </Card>
                                     <br/>
@@ -131,7 +135,7 @@ const List = (props) => {
                     </Col>
                     <Col md>
                         <div className='LoginList'>
-                            <Login />
+                            <h1>Hello</h1>
                         </div>
                     </Col>
                 </Row>
@@ -151,4 +155,4 @@ const List = (props) => {
     
 }
 
-export default List
+export default MyList

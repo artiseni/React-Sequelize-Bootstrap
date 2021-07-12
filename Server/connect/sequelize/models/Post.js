@@ -6,10 +6,10 @@ const Post = connect.define('Post', {
         type : sequelize.INTEGER
     },
     title: {
-        type : sequelize.STRING
+        type : sequelize.TEXT
     },
     content: {
-        type : sequelize.STRING
+        type : sequelize.TEXT
     }
 }, {tableName: "posts"})
 

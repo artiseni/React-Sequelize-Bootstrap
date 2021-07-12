@@ -1,14 +1,20 @@
-import React from 'react'
-import { useLocation, Redirect } from 'react-router-dom'
-import { Button, Card, Container, Navbar, Nav } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { useLocation, Redirect, useHistory } from 'react-router-dom'
+import { Button, Card, Container } from 'react-bootstrap'
+import NavbarHome from '../components/home/Navbar'
+
 
 
 const Home = () => {
 
     const location = useLocation()
+    const history = useHistory()
     const data = location.state
+    const [valid, setValid] = useState(true)
 
-    if (data === undefined) {
+    if(valid === false) {
+        return  <Redirect to='/'/>
+    } else if (data === undefined) {
         return  <Redirect to='/login'/>
     }
     
@@ -16,19 +22,20 @@ const Home = () => {
         console.log(data)
     }
 
+    const myBlog = () => {
+        history.push({
+            pathname : '/home/mypost',
+            state : data
+        })
+    }
+
+    const logOut = () => {
+        setValid(false)
+    }
+
     return (
         <>
-            <Navbar bg="primary" variant="dark" className="p-2" >
-                <Navbar.Brand > SimpleBlog </Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link >My post</Nav.Link>
-                    <Nav.Link >Features</Nav.Link>
-                    <Nav.Link >Pricing</Nav.Link>
-                </Nav>
-                <Navbar.Collapse className="justify-content-end">
-                    <Nav.Link href="/">Logout</Nav.Link>
-                </Navbar.Collapse>
-            </Navbar>
+            <NavbarHome myBlog={ myBlog } logOut={logOut} />
             <Container>
                 <Card>
                     <div className='Home'>

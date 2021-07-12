@@ -2,7 +2,8 @@ import React from 'react'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
-import List from './components/blogs/List'
+import Mypost from './pages/Mypost'
+import Index from './pages/Index'
 import './css/App.css'
 
 
@@ -17,8 +18,10 @@ const App = () => {
       return <Signup />
     case '/home':
       return <Home />
+    case '/home/mypost':
+      return <Mypost />
     default:
-      return <List />
+      return <Index />
   }
 }
 
